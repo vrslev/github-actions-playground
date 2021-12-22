@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+
+jobs:
+  update_example_env:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+
+      - name: Get latest versions
+        run: python3 ./.github/scripts/get_latest_tags.py --repo erpnext --version 13
+
+      - name: Update example.env
+        run: python3 ./.github/scripts/update_example_env.py
+
+      # - name: Setup tmate session
+      #   uses: mxschmitt/action-tmate@v3
+
+      - name: Setup Git Credentials
+        run: |
+          git config --global user.name github-actions
+          git config --global user.email github-actions@github.com
+
+      - name: Commit and push
+        run: |
+          git add example.env
+          git commit -m "chore: Update `example.env`"
+          git push origin main
