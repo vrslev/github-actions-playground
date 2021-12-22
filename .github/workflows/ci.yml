@@ -29,5 +29,11 @@ jobs:
           git config --global user.name github-actions
           git config --global user.email github-actions@github.com
           git add example.env
-          git commit -m "chore: Update example.env"
-          git push origin main
+          if [ -z "$(git status --porcelain)" ]; then 
+            echo "example.env did not change, exiting."
+            exit 0
+          else
+            echo "example.env changed, pushing changes..."
+            git commit -m "chore: Update example.env"
+            git push origin main
+          fi
