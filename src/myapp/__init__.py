@@ -1,5 +1,5 @@
 def main() -> int:
-    print("hello world")
+    print("hello hello world")
     return 0
 
 
