@@ -24,7 +24,7 @@ jobs:
           key: test-${{ matrix.python-version }}-${{ hashFiles('pyproject.toml') }}
 
       - run: |
-          pip install -U poetry
+          pip install -U poetry==v1.2.0a2
           poetry config virtualenvs.create false
 
       - run: poetry install
