@@ -1,3 +1,3 @@
-Repository to test GitHub Actions.
+Repository to test GitHub Actions!
 
 ### Latest Changes
